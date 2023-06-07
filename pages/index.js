@@ -31,6 +31,29 @@ export default function Home({ allPostsData }) {
           You can contact me on my{" "}
           <a href="https://www.linkedin.com/in/chi-ting-lu/">LinkedIn</a>.
         </p>
+        <button
+          onClick={() => {
+            console.log("test shareButton");
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: "Snapshot",
+                  // text: window.location.href,
+                  url: window.location.href,
+                  // url: "https://codepen.io/ayoisaiah/pen/YbNazJ"
+                })
+                .then(() => {
+                  console.log("Thanks for sharing!");
+                })
+                .catch(console.error);
+            } else {
+              // shareDialog.classList.add('is-open');
+              console.log("cannot share");
+            }
+          }}
+        >
+          share video
+        </button>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
