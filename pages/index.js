@@ -43,7 +43,7 @@ export default function Home({ allPostsData }) {
             const filesArray = [
               new File([blob], "Snapshot.mp4", {
                 type: "video/mp4",
-                lastModified: new Date().getTime(),
+                lastModified: new Date.now(),
               }),
             ];
             const shareData = {
