@@ -42,7 +42,7 @@ export default function Home({ allPostsData }) {
                 return response.blob();
               })
               .then(function (blob) {
-                var file = new File([blob], "video.mp4", {
+                var file = new File([blob], "Snapshot.mp4", {
                   type: "video/mp4",
                 });
                 var filesArray = [file];
@@ -52,10 +52,9 @@ export default function Home({ allPostsData }) {
                   navigator.canShare({ files: filesArray })
                 ) {
                   navigator.share({
-                    text: "some_text",
                     files: filesArray,
-                    title: "some_title",
-                    url: "some_url",
+                    title: "Snapshot",
+                    url: window.location.href,
                   });
                 }
               });
