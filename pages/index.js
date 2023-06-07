@@ -39,8 +39,11 @@ export default function Home({ allPostsData }) {
                 .share({
                   title: "Snapshot",
                   // text: window.location.href,
-                  url: window.location.href,
+                  //url: 'https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4',
                   // url: "https://codepen.io/ayoisaiah/pen/YbNazJ"
+                  files: [
+                    "https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4",
+                  ],
                 })
                 .then(() => {
                   console.log("Thanks for sharing!");
