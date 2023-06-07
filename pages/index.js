@@ -34,27 +34,30 @@ export default function Home({ allPostsData }) {
         <button
           onClick={async () => {
             console.log("test shareButton");
-
-            const response = await fetch(
+            fetch(
               "https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4"
-            );
-            const blob = await response.blob();
+            )
+              .then(function (response) {
+                console.log("fetch success");
+                return response.blob();
+              })
+              .then(function (blob) {
+                var file = new File([blob], "Snapshot.mp4", {
+                  type: "video/mp4",
+                  lastModified: new Date().getTime(),
+                });
+                var filesArray = [file];
 
-            const filesArray = [
-              new File([blob], "Snapshot.mp4", {
-                type: "video/mp4",
-                lastModified: new Date.now(),
-              }),
-            ];
-            const shareData = {
-              title: "Snapshot",
-              files: filesArray,
-              url: window.location.href,
-            };
-
-            if (navigator.canShare && navigator.canShare(shareData)) {
-              await navigator.share(shareData);
-            }
+                if (
+                  navigator.canShare &&
+                  navigator.canShare({ files: filesArray })
+                ) {
+                  navigator.share({
+                    files: filesArray,
+                    title: "Snapshot",
+                  });
+                }
+              });
           }}
         >
           share video
