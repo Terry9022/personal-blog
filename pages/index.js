@@ -43,7 +43,7 @@ export default function Home({ allPostsData }) {
               })
               .then(function (blob) {
                 var file = new File([blob], "Snapshot.mp4", {
-                  type: "video/mp4",
+                  type: blob.type,
                   lastModified: 1686134330005,
                 });
                 var filesArray = [file];
