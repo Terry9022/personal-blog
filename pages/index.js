@@ -32,32 +32,29 @@ export default function Home({ allPostsData }) {
           <a href="https://www.linkedin.com/in/chi-ting-lu/">LinkedIn</a>.
         </p>
         <button
-          onClick={() => {
+          onClick={async () => {
             console.log("test shareButton");
-            fetch(
-              "https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4"
-            )
-              .then(function (response) {
-                console.log("fetch success");
-                return response.blob();
-              })
-              .then(function (blob) {
-                var file = new File([blob], "Snapshot.mp4", {
-                  type: "video/mp4",
-                });
-                var filesArray = [file];
 
-                if (
-                  navigator.canShare &&
-                  navigator.canShare({ files: filesArray })
-                ) {
-                  navigator.share({
-                    files: filesArray,
-                    title: "Snapshot",
-                    url: window.location.href,
-                  });
-                }
-              });
+            const response = await fetch(
+              "https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4"
+            );
+            const blob = await response.blob();
+
+            const filesArray = [
+              new File([blob], "Snapshot.mp4", {
+                type: "video/mp4",
+                lastModified: new Date().getTime(),
+              }),
+            ];
+            const shareData = {
+              title: "Snapshot",
+              files: filesArray,
+              url: window.location.href,
+            };
+
+            if (navigator.canShare && navigator.canShare(shareData)) {
+              await navigator.share(shareData);
+            }
           }}
         >
           share video
