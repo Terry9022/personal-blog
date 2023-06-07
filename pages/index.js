@@ -34,25 +34,31 @@ export default function Home({ allPostsData }) {
         <button
           onClick={() => {
             console.log("test shareButton");
-            if (navigator.share) {
-              navigator
-                .share({
-                  title: "Snapshot",
-                  // text: window.location.href,
-                  //url: 'https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4',
-                  // url: "https://codepen.io/ayoisaiah/pen/YbNazJ"
-                  files: [
-                    "https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4",
-                  ],
-                })
-                .then(() => {
-                  console.log("Thanks for sharing!");
-                })
-                .catch(console.error);
-            } else {
-              // shareDialog.classList.add('is-open');
-              console.log("cannot share");
-            }
+            fetch(
+              "https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4"
+            )
+              .then(function (response) {
+                console.log("fetch success");
+                return response.blob();
+              })
+              .then(function (blob) {
+                var file = new File([blob], "video.mp4", {
+                  type: "video/mp4",
+                });
+                var filesArray = [file];
+
+                if (
+                  navigator.canShare &&
+                  navigator.canShare({ files: filesArray })
+                ) {
+                  navigator.share({
+                    text: "some_text",
+                    files: filesArray,
+                    title: "some_title",
+                    url: "some_url",
+                  });
+                }
+              });
           }}
         >
           share video
