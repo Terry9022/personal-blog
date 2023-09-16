@@ -26,44 +26,16 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>
-          Hello, I'm Terry, an Economics Bachelor from National Taiwan
-          University. I become a Software Engineer / Web Developer to realize
-          innovative ideas using technology.
+          Hello, I'm Terry, a graduate student at Rensselaer Polytechnic
+          Institute studying in the Information Technology department. I become
+          a Software Engineer / Web Developer to realize innovative ideas using
+          technology.
         </p>
-        <p>I am about to go to New York, United States this Fall.</p>
+        <p>Currently, I am in New York, United States.</p>
         <p>
           You can contact me on my{" "}
           <a href="https://www.linkedin.com/in/chi-ting-lu/">LinkedIn</a>.
         </p>
-        <button
-          onClick={async () => {
-            console.log("test shareButton");
-            fetch(
-              "https://storage.googleapis.com/memophoto/ss/20230604/71a703f142531c5a72b7abb6266353366cab55a413.mp4"
-            )
-              .then(function (response) {
-                console.log("fetch success");
-                return response.blob();
-              })
-              .then(function (blob) {
-                var file = new File([blob], "Snapshot.mp4", {
-                  type: blob.type,
-                });
-                var filesArray = [file];
-
-                if (
-                  navigator.canShare &&
-                  navigator.canShare({ files: filesArray })
-                ) {
-                  navigator.share({
-                    files: filesArray,
-                  });
-                }
-              });
-          }}
-        >
-          share video
-        </button>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
