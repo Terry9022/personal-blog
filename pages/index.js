@@ -27,9 +27,8 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>
           Hello, I'm Terry, a graduate student at Rensselaer Polytechnic
-          Institute studying in the Information Technology department. I become
-          a Software Engineer / Web Developer to realize innovative ideas using
-          technology.
+          Institute. I become a Software Engineer / Web Developer to realize
+          innovative ideas using technology.
         </p>
         <p>Currently, I am in New York, United States.</p>
         <p>
